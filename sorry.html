@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You, My Love ❤️</title>
+    <!-- Use Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font for a cute, soft feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #FFC0CB; /* Soft pink */
+            background-image: linear-gradient(to bottom, #F9A8D4, #EC4899);
+            overflow: hidden; /* Hide scrollbars for falling hearts */
+        }
+        
+        .heart-fall {
+            position: absolute;
+            background-color: transparent;
+            font-size: 2rem;
+            animation: fall linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .page {
+            display: none;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        /* Entry animation for pages */
+        @keyframes fadeInScaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .fade-in-scale-up {
+            animation-name: fadeInScaleUp;
+        }
+
+        /* Bounce animation for a button */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        .bounce-button {
+            animation: bounce 1.5s infinite;
+        }
+
+        /* Heartbeat animation for final message */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            10% { transform: scale(1.1); }
+            20% { transform: scale(1); }
+            30% { transform: scale(1.1); }
+            40% { transform: scale(1); }
+        }
+
+        .heartbeat-animation {
+            animation: heartbeat 2s infinite;
+        }
+
+        /* Pop-out animation for the final heart explosion */
+        @keyframes pop-heart {
+            0% {
+                transform: translate(0, 0) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--final-x), var(--final-y)) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .pop-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation-name: pop-heart;
+            animation-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 md:p-8">
+
+    <!-- Main apology card -->
+    <main class="relative bg-white bg-opacity-90 backdrop-filter backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-3xl shadow-2xl text-center max-w-lg mx-auto border-4 border-white transition-transform duration-500">
+        
+        <!-- Page 1: Introduction -->
+        <div id="page1" class="page fade-in-scale-up">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-pink-700 mb-4 md:mb-6 leading-tight">
+                For My Dearest Pie
+                <span class="animate-pulse inline-block">💖</span>
+            </h1>
+            <p class="text-base sm:text-lg text-pink-900 mb-8 md:mb-10">
+                I made this little space just for you to say what's on my heart. Please click the button to begin.
+            </p>
+            <button id="nextPage1" class="bg-pink-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-pink-600 transition-colors duration-300 transform hover:scale-105 bounce-button">
+                Start My Message ✨👇
+            </button>
+        </div>
+
+        <!-- Page 2: The Apology -->
+        <div id="page2" class="page">
+            <h2 class="text-2xl sm:text-3xl font-bold text-pink-700 mb-4 flex items-center justify-center gap-3">
+                <span class="text-3xl">🥺</span> I was thinking of you
+            </h2>
+            <p class="text-base sm:text-lg text-pink-800 mb-6">
+                I know I didn't give you the support and time you needed today, and I feel so bad about it. The last thing I want is to make you sad.
+            </p>
+            <div class="flex justify-center mt-8 space-x-4">
+                <button id="backPage2" class="bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-full hover:bg-gray-400 transition-colors duration-300">
+                    👈 Back
+                </button>
+                <button id="nextPage2" class="bg-pink-500 text-white font-bold py-2 px-6 rounded-full hover:bg-pink-600 transition-colors duration-300">
+                    Next 👉
+                </button>
+            </div>
+        </div>
+
+        <!-- Page 3: The Connection -->
+        <div id="page3" class="page">
+            <h2 class="text-2xl sm:text-3xl font-bold text-pink-700 mb-4 flex items-center justify-center gap-3">
+                <span class="text-3xl">📞</span> I miss you
+            </h2>
+            <p class="text-base sm:text-lg text-pink-800 mb-6">
+                Even with the distance between us, I miss you more than words can say. Every day I wish I could be there just to hug you.
+            </p>
+            <div class="flex justify-center mt-8 space-x-4">
+                <button id="backPage3" class="bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-full hover:bg-gray-400 transition-colors duration-300">
+                    👈 Back
+                </button>
+                <button id="nextPage3" class="bg-pink-500 text-white font-bold py-2 px-6 rounded-full hover:bg-pink-600 transition-colors duration-300">
+                    Next 👉
+                </button>
+            </div>
+        </div>
+
+        <!-- Page 4: The Promise -->
+        <div id="page4" class="page">
+            <h2 class="text-2xl sm:text-3xl font-bold text-pink-700 mb-4 flex items-center justify-center gap-3">
+                <span class="text-3xl">🤝</span> A future plan
+            </h2>
+            <p class="text-base sm:text-lg text-pink-800 mb-6">
+                I'm already dreaming about planning a virtual movie night with you as soon as you settle into your new hostel. It's something to look forward to!
+            </p>
+            <div class="flex justify-center mt-8 space-x-4">
+                <button id="backPage4" class="bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-full hover:bg-gray-400 transition-colors duration-300">
+                    👈 Back
+                </button>
+                <button id="nextPage4" class="bg-pink-500 text-white font-bold py-2 px-6 rounded-full hover:bg-pink-600 transition-colors duration-300">
+                    Next 👉
+                </button>
+            </div>
+        </div>
+
+        <!-- Page 5: Final Message -->
+        <div id="page5" class="page">
+            <h2 class="text-2xl sm:text-3xl font-bold text-pink-700 mb-4 flex items-center justify-center gap-3">
+                <span class="text-3xl">💌</span> You are my world
+            </h2>
+            <p id="finalMessage" class="text-base sm:text-lg text-pink-800 mb-6">
+                You are my person. No matter the distance, we are always connected. You make my world so much brighter, my beautiful Pie.
+            </p>
+            <p class="mt-8 text-xl sm:text-2xl text-pink-900 font-bold heartbeat-animation">
+                heartttttttttt uuuuuuuuuuu piiiieeeeeeee
+            </p>
+            <button id="generateMessageBtn" class="bg-pink-500 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-pink-600 transition-colors duration-300 mt-6">
+                <span id="genBtnText">Get a new quote ✨</span>
+            </button>
+        </div>
+        
+    </main>
+
+    <!-- JavaScript to create and animate falling hearts and handle Gemini API calls -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.body;
+            const heartEmojis = ['💖', '❤️', '🧡', '💛', '💚', '💙', '💜', '✨', '💫'];
+
+            // Function to create a new heart element
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-fall');
+                heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDuration = `${Math.random() * 2 + 3}s`; // 3-5 seconds
+                container.appendChild(heart);
+
+                // Remove heart after it falls
+                setTimeout(() => {
+                    heart.remove();
+                }, parseFloat(heart.style.animationDuration) * 1000);
+            }
+
+            // Create a new heart every 300ms
+            setInterval(createHeart, 300);
+
+            // --- Multi-page Navigation Logic ---
+            const pages = [
+                document.getElementById('page1'),
+                document.getElementById('page2'),
+                document.getElementById('page3'),
+                document.getElementById('page4'),
+                document.getElementById('page5')
+            ];
+            let currentPage = 0;
+
+            // Initially show only the first page
+            pages[currentPage].style.display = 'block';
+
+            function navigate(direction) {
+                // Hide the current page
+                pages[currentPage].classList.remove('fade-in-scale-up');
+                
+                // Determine the next page index
+                const nextPage = currentPage + direction;
+                if (nextPage >= 0 && nextPage < pages.length) {
+                    pages[currentPage].style.display = 'none';
+                    currentPage = nextPage;
+                    pages[currentPage].style.display = 'block';
+                    // Trigger the fade-in animation for the new page
+                    pages[currentPage].classList.add('fade-in-scale-up');
+                }
+            }
+
+            // Function to create the heart explosion effect
+            function triggerHeartExplosion() {
+                const explosionContainer = document.createElement('div');
+                explosionContainer.style.position = 'fixed';
+                explosionContainer.style.top = '50%';
+                explosionContainer.style.left = '50%';
+                explosionContainer.style.width = '0';
+                explosionContainer.style.height = '0';
+                explosionContainer.style.zIndex = '100'; // Make sure it's on top
+                document.body.appendChild(explosionContainer);
+
+                const popEmojis = ['💖', '❤️', '✨', '💫'];
+                const numberOfHearts = 60;
+
+                for (let i = 0; i < numberOfHearts; i++) {
+                    const heart = document.createElement('div');
+                    heart.classList.add('pop-heart');
+                    heart.innerHTML = popEmojis[Math.floor(Math.random() * popEmojis.length)];
+                    
+                    // Apply a transform to simulate the explosion
+                    const angle = Math.random() * 2 * Math.PI;
+                    const distance = Math.random() * 250 + 100; // 100 to 350px
+                    const finalX = Math.cos(angle) * distance;
+                    const finalY = Math.sin(angle) * distance;
+
+                    heart.style.setProperty('--final-x', `${finalX}px`);
+                    heart.style.setProperty('--final-y', `${finalY}px`);
+
+                    heart.style.animationDelay = `${Math.random() * 0.5}s`;
+                    heart.style.animationDuration = `${Math.random() * 1.5 + 1.5}s`; // 1.5s to 3s
+
+                    explosionContainer.appendChild(heart);
+
+                    // Remove the heart after its animation finishes
+                    setTimeout(() => heart.remove(), parseFloat(heart.style.animationDuration) * 1000 + parseFloat(heart.style.animationDelay) * 1000 + 100);
+                }
+            }
+            
+            // --- Quote Cycling Logic ---
+            const loveQuotes = [
+                "You are my person. No matter the distance, we are always connected. You make my world so much brighter, my beautiful Pie.",
+                "Missing you is hard, but knowing you're mine makes every mile worth it. I can't wait to see you soon, Pie.",
+                "You are the light in my life, and even on my darkest days, you make me smile. Thinking of you always, my love.",
+                "Every moment we spend apart is a reminder of how much I cherish our time together. I love you, Pie.",
+                "Even from a distance, your love gives me all the strength I need. You are the best thing that's ever happened to me.",
+                "Thinking of our future movie night is the only thing on my mind right now. Just you and me, together, my sweet Pie."
+            ];
+            let currentQuoteIndex = 0;
+
+            const finalMessageEl = document.getElementById('finalMessage');
+
+            function cycleQuotes() {
+                currentQuoteIndex = (currentQuoteIndex + 1) % loveQuotes.length;
+                finalMessageEl.textContent = loveQuotes[currentQuoteIndex];
+            }
+
+            // Event listeners for navigation buttons
+            document.getElementById('nextPage1').addEventListener('click', () => navigate(1));
+            document.getElementById('nextPage2').addEventListener('click', () => navigate(1));
+            document.getElementById('nextPage3').addEventListener('click', () => navigate(1));
+            
+            // Special logic for the final button to trigger the explosion
+            document.getElementById('nextPage4').addEventListener('click', () => {
+                // Hide the current page
+                pages[currentPage].classList.remove('fade-in-scale-up');
+                pages[currentPage].style.display = 'none';
+
+                // Show the final message page
+                currentPage = 4;
+                pages[currentPage].style.display = 'block';
+                pages[currentPage].classList.add('fade-in-scale-up');
+
+                // Trigger the heart explosion
+                triggerHeartExplosion();
+            });
+
+            document.getElementById('backPage2').addEventListener('click', () => navigate(-1));
+            document.getElementById('backPage3').addEventListener('click', () => navigate(-1));
+            document.getElementById('backPage4').addEventListener('click', () => navigate(-1));
+            
+            // Event listener for the new quote button
+            document.getElementById('generateMessageBtn').addEventListener('click', cycleQuotes);
+        });
+    </script>
+</body>
+</html>
